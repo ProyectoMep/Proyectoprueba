@@ -1,0 +1,143 @@
+Archivo: "Push security"
+ruta: "input/Push-Security-Deployment-Details-Colombia-2026-04-06.xlsx"
+columna criterio: "Push security enabled"
+criterio: "No"
+columna id: "Hostname"
+categoria: "Workstations"
+
+Archivo: "DLP"
+ruta: "input/Trellix-Deployment-Details-Colombia-2026-04-06.xlsx"
+columna criterio: "DLP"
+criterio: "Not Deploy"
+columna criterio 2: "name"
+criterio 2: *+SANCO+*
+columna id: "Name"
+categoria: "Workstations"
+
+Archivo: "cifrado"
+ruta: "input/Workstation-Encryption-Details-Colombia-2026-04-06.xlsx"
+columna criterio: "Encription"
+criterio: "No"
+columna id: "Hostname"
+categoria: "Workstations"
+
+Archivo: "Crowdstrike"
+ruta: "input/Detail-Details-Colombia-2026-04-06.xlsx"
+columna criterio: "Crowdstrike"
+criterio: "Not Deploy"
+columna id: "Name"
+categoria: "Workstations"
+
+Archivo: "Netskope"
+ruta: "input/Windows-Deployment-Details-Colombia-2026-04-06.xlsx"
+columna criterio: "Deploy Text"
+criterio: "Not Deploy"
+columna id: " Hostname"
+categoria: "Workstations"
+operacion: "workstations" -> columna=hostname, valor=*SANCO*
+operacion: "virtuales" -> columna=hostname, valor=+SANCO+
+
+Archivo: "High Risk Software"
+ruta: "input/high risk software plantilla.xlsx"
+columna criterio: 
+criterio: 
+columna id: "Hostname"
+categoria: "Workstations"
+
+Archivo: "Qualys"
+ruta: "input/Qualys-workstations-Details-Colombia-2026-04-06.xlsx"
+columna criterio: "In Qualys"
+criterio: "Not Deploy"
+columna id: "hostname"
+categoria: "Workstations"
+operacion: "na" -> columna=name, valor=vacio
+operacion: "compliant" -> columna=in qualys, valor=*vacio*
+
+Archivo: "Cobertura Qualys"
+ruta: "input/Agents Based-Details-Colombia-2026-04-06.xlsx"
+columna criterio: "type"
+criterio: "Workstation"
+columna criterio 2 :"deployment"
+criterio 2 : "Failed"
+columna id: "hostname"
+categoria: "Workstations"
+
+Archivo: "Workstations Retired"
+ruta: "input/Workstations_Retired-Details-Colombia-2026-04-06.xlsx"
+columna criterio: "CMDB Company"
+criterio: 
+columna id: "Hostname"
+categoria: "Workstations"
+
+Archivo: "Non-Phishing"
+ruta: "input/Cloud_Authentication_Non_Phishing_PasswordLess-Details-Colombia-2026-04-06.xlsx"
+columna criterio: "Non-Phishing Resistant Methods"
+criterio: *[]*
+columna criterio 2 :"Block Non-Phishing Resistant Methods"
+criterio 2 : "No"
+columna id: "User Principal Name"
+categoria: "Dispositivos Móviles"
+limpiar id: "@ucloud.santandergroup.net"
+
+Archivo: "Windows hello"
+ruta: "input/Cloud_Authentication_Non_Phishing_PasswordLess-Details-Colombia-2026-04-06.xlsx"
+columna criterio: "Registered Methods"
+criterio: *+hello+*
+columna id: "User Principal Name"
+categoria: "Dispositivos Móviles"
+
+Archivo: "MFA"
+ruta: "input/Cloud_Authentication_Non_Phishing_PasswordLess-Details-Colombia-2026-04-06.xlsx"
+columna criterio: "Registered Methods"
+criterio: "[]"
+columna id: "User Principal Name"
+categoria: "Dispositivos Móviles"
+limpiar id: "@ucloud.santandergroup.net"
+
+Archivo: "Ironchip"
+ruta: "input/2026-04-07 13_22_23.413716094 +0000 UTC.csv"
+columna criterio: "Status"
+criterio: "Invited"
+columna id: "username"
+categoria: "Dispositivos Móviles"
+limpiar id: "@ucloud.santandergroup.net"
+
+Archivo: "Harmony"
+ruta: "input/Deploy-MTD-Android-iOS-Details-Colombia-2026-04-06.xlsx"
+columna criterio: "Harmony"
+criterio: "Not deploy"
+columna id: "Username"
+categoria: "Dispositivos Móviles"
+limpiar id: "@ucloud.santandergroup.net"
+
+Archivo: "MTD"
+ruta: "input/Deploy-MTD-Android-iOS-Details-Colombia-2026-04-06.xlsx"
+columna criterio: "Status"
+criterio: "Not deploy"
+columna id: "Username"
+categoria: "Dispositivos Móviles"
+limpiar id: "@ucloud.santandergroup.net"
+
+
+Archivo: "MTD client version"
+ruta: "input/MTD-Client-Version-Details-Colombia-2026-04-06.xlsx"
+columna criterio: "Client Version Update"
+criterio: "No"
+columna id: "Username"
+categoria: "Dispositivos Móviles"
+limpiar id: "@ucloud.santandergroup.net"
+
+
+Archivo: "Moviles"
+ruta: "input/DevicesWithInventory_705b1475-9fae-44fd-a1e9-f446405a9909.csv"
+columna criterio: "os"
+criterio: *+Windows+*
+columna id: "primary user upn"
+categoria: "Dispositivos Móviles"
+limpiar id: "@ucloud.santandergroup.net"
+operacion: "android" -> columna=os, valor=+Android+ && columna=os al dia, valor=+desactualizado+
+operacion: "ios" -> columna=os, valor=+iOS+ && columna=os al dia, valor=+desactualizado+
+operacion: "update" -> columna=os al dia, valor=+desactualizado+
+operacion: "noncomply" -> columna=compliance, valor=+Noncompliant+
+
+

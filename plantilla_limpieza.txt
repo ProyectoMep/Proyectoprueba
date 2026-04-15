@@ -1,0 +1,97 @@
+# CONFIGURACIÓN DE LIMPIEZA POST-ENRIQUECIMIENTO
+# Elimina filas según grupos de condiciones
+
+# SINTAXIS:
+# Eliminar si: columna = valor &&  → AND (conecta con la siguiente condición)
+# Eliminar si: columna = valor ||  → OR (alternativa, inicia nuevo grupo)
+# Eliminar si: columna = valor     → Sin operador (última del grupo)
+
+# OPERADORES DE COMPARACIÓN:
+# columna = valor          → Igual exacto
+# columna = +valor+        → Contiene "valor"
+# columna = *+valor+*      → NO contiene "valor"
+# columna = *valor*        → Diferente de "valor"
+# columna = []             → Vacío (null, vacío, N/A)
+# columna = *[]*           → NO vacío
+
+# LÓGICA:
+# - Condiciones con && se agrupan (todas deben cumplirse)
+# - Grupos se conectan con OR implícito entre ellos
+# - Ejemplo: (A && B && C) || (D && E) → Elimina si cumple (A Y B Y C) Ó (D Y E)
+
+# ================== LIMPIAR MOVILES: DISPOSITIVOS QUE ESTÁN OK ==================
+# Elimina dispositivos que:
+# - os al dia contiene "actualizado" Y
+# - deprecado es igual a "OK" Y
+# - compliance contiene "Compliant" (o igual a "Compliant")
+
+Hoja: "Moviles"
+Eliminar si: os al dia = "actualizado" &&
+Eliminar si: deprecado = "OK" &&
+Eliminar si: compliance = "Compliant"
+
+Hoja: "Windows hello"
+Eliminar si: job profile = +Customer Sales & Support+ ||
+Eliminar si: title = +Customer Sales & Support+ ||
+Eliminar si: job profile = +SANCO+ ||
+Eliminar si: name = +SANCO+ ||
+Eliminar si: model = +SM-T+ ||
+Eliminar si: model = +SM-X+ || 
+Eliminar si: model = +Ipad+ ||
+
+
+
+
+
+
+# NOTA: Estamos eliminando los dispositivos que ESTÁN BIEN (actualizados, OK, compliant)
+# Para quedarnos solo con los que NECESITAN ATENCIÓN (desactualizados, deprecados, no compliant)
+
+# ================== EJEMPLO 2: ELIMINAR POR NO CONTIENE ==================
+# Elimina dispositivos que NO contienen "Android" en OS
+
+#Hoja: "Moviles"
+#Eliminar si: os = *+Android+* &&
+#Eliminar si: status = +Active+
+
+# ================== EJEMPLO 3: COMBINAR OPERADORES ==================
+# Elimina dispositivos que:
+# - Contienen "actualizado" en OS Y
+# - NO contienen "pendiente" en estado Y
+# - NO están vacíos en compliance
+
+#Hoja: "Dispositivos"
+#Eliminar si: os version = +actualizado+ &&
+#Eliminar si: estado = *+pendiente+* &&
+#Eliminar si: compliance = *[]*
+
+# ================== EJEMPLO 4: MÚLTIPLES GRUPOS (OR) ==================
+# Elimina dispositivos que cumplan (Grupo 1) O (Grupo 2)
+
+#Hoja: "Workstations"
+#Eliminar si: status = "Retired" &&
+#Eliminar si: last_seen = [] ||
+#Eliminar si: compliance = +non-compliant+ &&
+#Eliminar si: risk_score = +High+
+
+# Esto eliminará filas que cumplan:
+# - (status="Retired" Y last_seen vacío) Ó
+# - (compliance contiene "non-compliant" Y risk_score contiene "High")
+
+# ================== EJEMPLO 5: FILTRO POR DIFERENCIA ==================
+# Elimina todos excepto los que son "Premium"
+
+#Hoja: "Usuarios"
+#Eliminar si: tipo = *Premium*
+
+# ================== EJEMPLO 6: SOLO VACÍOS ==================
+# Elimina registros con email vacío
+
+#Hoja: "Contactos"
+#Eliminar si: email = []
+
+# ================== EJEMPLO 7: SOLO NO VACÍOS ==================
+# Elimina registros con teléfono NO vacío (inverso)
+
+#Hoja: "Clientes"
+#Eliminar si: telefono = *[]*

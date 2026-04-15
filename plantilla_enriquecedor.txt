@@ -1,0 +1,125 @@
+# PLANTILLA CONFIGURACIÓN ENRIQUECEDOR
+# Cada bloque comienza con: Hoja: "NombreHoja"
+# Claves admitidas dentro de un bloque:
+#   Hoja: "Nombre de la hoja en el Excel base"
+#   Columna base: "Columna usada para buscar coincidencias (opcional si solo fórmulas)"
+#   Ruta: "Ruta a archivo externo (.xlsx/.xls/.csv)"
+#   Columna cruzar: "Columna en archivo externo para comparar con Columna base"
+#   Columna extraer: "Columna(s) del externo a copiar" (separar con + o comas)
+#   Columna calcular: nombre_columna = FORMULA
+
+# Parámetros globales
+Parametro: version_android_deprecada = 13
+Parametro: version_ios_deprecada = 17
+
+# ================== BLOQUES ==================
+
+Hoja: "Qualys"
+Columna base: "hostname"
+Ruta: "input/cmdb_ci_computer.xlsx"
+Columna cruzar: "Name"
+Columna extraer: "status" + "status reason" + "Name"
+
+Hoja: "Windows hello"
+Columna base: "user principal name"
+Ruta: "input/USER.xlsx"
+Columna cruzar: "CF - ESI - ESP Local Id"
+Columna extraer: "Job Profile"
+
+Hoja: "Windows hello"
+Columna base: "user principal name"
+Ruta: "input/cmdb_ci_computer.xlsx"
+Columna cruzar: "Employee ID"
+Columna extraer: "Name"
+
+Hoja: "Windows hello"
+Columna base: "user principal name"
+Ruta: "input/softerra.xlsx"
+Columna cruzar: "employeeNumber"
+Columna extraer: "title" + "company_softerra"
+
+Hoja: "Windows hello"
+Columna base: "user principal name"
+Ruta: "input/DevicesWithInventory_7ffe5356-45e9-4b41-b7e8-e00918739345.csv"
+Columna cruzar: "primary user upn"
+Columna extraer: "model"
+
+Hoja: "MFA"
+Columna base: "user principal name"
+Ruta: "input/softerra.xlsx"
+Columna cruzar: "employeeNumber"
+Columna extraer: "title" + "company_softerra"
+
+Hoja: "MFA"
+Columna base: "user principal name"
+Ruta: "input/cmdb_ci_computer.xlsx"
+Columna cruzar: "Employee ID"
+Columna extraer: "Name"
+
+Hoja: "Harmony"
+Columna base: "username"
+Ruta: "input/USER.xlsx"
+Columna cruzar: "CF - ESI - ESP Local Id"
+Columna extraer: "Legal Name" + "Company - ID"
+
+
+Hoja: "MTD"
+Columna base: "username"
+Ruta: "input/USER.xlsx"
+Columna cruzar: "CF - ESI - ESP Local Id"
+Columna extraer: "Legal Name"
+
+
+Hoja: "MTD client version"
+Columna base: "username"
+Ruta: "input/USER.xlsx"
+Columna cruzar: "CF - ESI - ESP Local Id"
+Columna extraer: "Legal Name"
+
+
+# ================== MOVILES ==================
+# 1) Última actualización por modelo
+Hoja: "Moviles"
+Columna base: "model"
+Ruta: "input/MOVILES OS(NO QUITAR, CAMBIAR).xlsx"
+Columna cruzar: "dispositivo"
+Columna extraer: "ultima actualizacion"
+Columna calcular: fuente = SI( O( os="Android (Fully Managed)"; os="Android (Personally-Owned Work Profile)"; os="Android (Dedicated)" ); "https://www.androidupdatetracker.com/"; SI( os="iOS/iPadOS"; "https://support.apple.com/es-co/100100"; "" ) )
+
+# 2) Cálculos
+Hoja: "Moviles"
+Columna calcular: os al dia = SI.ERROR( SI( SI.ERROR( COMP_VER( os version; ultima actualizacion ); 0 ) < 0; "desactualizado (" & STR( ultima actualizacion ) & ")"; "actualizado" ); "N/A" )
+Columna calcular: deprecado = SI( O( Y( O( os="Android (Fully Managed)"; os="Android (Personally-Owned Work Profile)"; os="Android (Dedicated)" ); SI.ERROR( COMP_VER( os version; version_android_deprecada ); 0 ) < 0 ); Y( os="iOS/iPadOS"; SI.ERROR( COMP_VER( os version; version_ios_deprecada ); 0 ) < 0 ) ); "DEPRECADO"; "OK" )
+
+# 3) OU desde archivo de usuarios
+Hoja: "Moviles"
+Columna base: "primary user upn"
+Ruta: "input/USER.xlsx"
+Columna cruzar: "CF - ESI - ESP Local Id"
+Columna extraer: "Company - ID" 
+
+# ================== ENRIQUECIMIENTO DE HOJAS RESUMEN ==================
+# Los resúmenes se pueden enriquecer igual que cualquier otra hoja
+# La columna "ID" del resumen se usa como columna base
+
+Hoja: "Resumen_Workstations"
+Columna base: "ID"
+Ruta: "input/cmdb_ci_computer.xlsx"
+Columna cruzar: "Name"
+Columna extraer: "Employee ID" + "Assigned to"
+
+
+
+# ================== LOOKUP DE REFERENCIA (opcional) ==================
+Hoja: "CatalogoVersiones"
+Columna base: "primary user upn"
+Ruta: "input/catalogo_versiones.xlsx"
+Columna cruzar: "modelo"
+Columna extraer: "version_minima"
+
+
+
+# ================== EJEMPLO SOLO FÓRMULAS ==================
+Hoja: "EjemploSoloFormulas"
+Columna calcular: riesgo = SI( O( estado="rooted"; estado="jailbroken" ); "ALTO"; "NORMAL" )
+Columna calcular: etiqueta_version = "Versión: " & os version

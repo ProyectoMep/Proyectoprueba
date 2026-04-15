@@ -1,0 +1,21 @@
+1
+"C:\Users\n505820\Santander Office 365\Escritorio\BatXcel 2.0\procesar_excel\plantilla_instrucciones.txt"
+"C:\Users\n505820\Santander Office 365\Escritorio\BatXcel 2.0\procesar_excel\output\salida.xlsx"
+s
+"C:\Users\n505820\Santander Office 365\Escritorio\BatXcel 2.0\procesar_excel\plantilla_enriquecedor.txt"
+s
+"C:\Users\n505820\Santander Office 365\Escritorio\BatXcel 2.0\procesar_excel\Plantilla_separador.txt"
+C:\Users\n505820\Santander Office 365\Escritorio\BatXcel 2.0\procesar_excel\output
+s
+"C:\Users\n505820\Santander Office 365\Escritorio\BatXcel 2.0\procesar_excel\plantilla_limpieza.txt"
+n
+s
+2
+"C:\Users\n505820\Santander Office 365\Escritorio\BatXcel 2.0\procesar_excel\output\Resumen Cyber BSNC.xlsx"
+"C:\Users\n505820\Downloads\Resumen Cyber BSNC (1).xlsx"
+"C:\Users\n505820\Santander Office 365\Escritorio\BatXcel 2.0\procesar_excel\input\Plantilla resumen BS.pptx"
+s
+2
+"C:\Users\n505820\Santander Office 365\Escritorio\BatXcel 2.0\procesar_excel\output\Resumen Cyber SF.xlsx"
+"C:\Users\n505820\Santander Office 365\Escritorio\BatXcel 2.0\procesar_excel\input\Plantilla resumen SF.pptx"
+C:\Users\n505820\Santander Office 365\Escritorio\BatXcel 2.0\procesar_excel\output

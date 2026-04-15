@@ -1,0 +1,106 @@
+# Notación:
+# - Operadores lógicos: && (AND), || (OR)
+# - Búsquedas: +valor+ (contiene), *valor* (diferente)
+# - Manejo de vacíos:
+#       []    = vacío
+#       *[]*  = diferente de vacío
+
+Input: input/Push-Security-Deployment-Details-Colombia-2026-04-06.xlsx
+Métrica: Push security
+Cumplimiento: % 0.97
+Criterio favor: columna=push security enabled, valor=Yes
+Criterio total: columna=[], valor=[]
+
+Input: input/Trellix-Deployment-Details-Colombia-2026-04-06.xlsx
+Métrica: DLP Trellix
+Cumplimiento: % 0.97
+Criterio favor: columna=DLP, valor=Deploy
+Criterio total: columna=name, valor=*+SANCO+*
+
+Input: input/Workstation-Encryption-Details-Colombia-2026-04-06.xlsx
+Métrica: Cifrado
+Cumplimiento: % 0.97
+Criterio favor: columna=encription, valor=Yes
+Criterio total: columna=[], valor=[]
+
+Input: input/Detail-Details-Colombia-2026-04-06.xlsx
+Métrica: Crowdstrike
+Cumplimiento: % 1
+Criterio favor: columna=crowdstrike, valor=Deploy
+Criterio total: columna=[], valor=[]
+
+Input: input/Windows-Deployment-Details-Colombia-2026-04-06.xlsx
+Métrica: Netskope Workstations
+Cumplimiento: % 0.97
+Criterio favor: columna=deploy text, valor=Deploy
+Criterio total: columna=[], valor=[]
+
+Input: input/Windows-Deployment-Details-Colombia-2026-04-06.xlsx
+Métrica: Netskope PC virtuales
+Cumplimiento: % 0.97
+Criterio favor: columna=deploy text, valor=Deploy && (columna=hostname, valor=+SANCO+)
+Criterio total: columna=hostname, valor=+SANCO+
+
+Input: input/high risk software plantilla.xlsx
+Métrica: High Risk Software
+Cumplimiento: N 0
+Criterio total: columna=[], valor=[]
+
+Input: input/Qualys-workstations-Details-Colombia-2026-04-06.xlsx
+Métrica: Qualys cmdb
+Cumplimiento: % 0.97
+Criterio favor: columna=in qualys, valor=Deploy
+Criterio total: columna=[], valor=[]
+
+Input: input/Workstations_Retired-Details-Colombia-2026-04-06.xlsx
+Métrica: Workstations Retired
+Cumplimiento: N 1
+Criterio total: columna=[], valor=[]
+
+Input: input/Cloud_Authentication_Non_Phishing_PasswordLess-Details-Colombia-2026-04-06.xlsx
+Métrica: Non-Phishing
+Cumplimiento: % 1
+Criterio favor: columna=block non-phishing resistant methods, valor=yes || (columna=non-phishing resistant methods, valor=[] && columna=block non-phishing resistant methods, valor=no)
+Criterio total: columna=[], valor=[]
+
+Input: input/Cloud_Authentication_Non_Phishing_PasswordLess-Details-Colombia-2026-04-06.xlsx
+Métrica: Windows hello
+Cumplimiento: % 0.97
+Criterio favor: columna=registered methods, valor=+hello+
+Criterio total: columna=[], valor=[]
+
+Input: input/Cloud_Authentication_Non_Phishing_PasswordLess-Details-Colombia-2026-04-06.xlsx
+Métrica: MFA
+Cumplimiento: % 0.97
+Criterio favor: columna=registered methods, valor=*[]*
+Criterio total: columna=[], valor=[]
+
+Input: input/2026-04-07 13_22_23.413716094 +0000 UTC.csv
+Métrica: Ironchip
+Cumplimiento: % 0.97
+Criterio favor: columna=status, valor=*invited*
+Criterio total: columna=[], valor=[]
+
+Input: input/Deploy-MTD-Android-iOS-Details-Colombia-2026-04-06.xlsx
+Métrica: Harmony Instalado
+Cumplimiento: % 0.99
+Criterio favor: columna=harmony, valor=deploy
+Criterio total: columna=[], valor=[]
+
+Input: input/Deploy-MTD-Android-iOS-Details-Colombia-2026-04-06.xlsx
+Métrica: MTD Sincronizado
+Cumplimiento: % 0.97
+Criterio favor: columna=status, valor=deploy
+Criterio total: columna=[], valor=[]
+
+Input: input/MTD-Client-Version-Details-Colombia-2026-04-06.xlsx
+Métrica: MTD Version
+Cumplimiento: % 0.97
+Criterio favor: columna=client version update, valor=yes
+Criterio total: columna=[], valor=[]
+
+Input: input/DevicesWithInventory_705b1475-9fae-44fd-a1e9-f446405a9909.csv
+Métrica: Moviles Compliant
+Cumplimiento: % 0.97
+Criterio favor: columna=compliance, valor=*noncompliant*
+Criterio total: columna=[], valor=[]

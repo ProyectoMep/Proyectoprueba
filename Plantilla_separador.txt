@@ -1,0 +1,57 @@
+name: "Resumen Cyber BSNC"
+identificadores: "BS de Negocios Colombia", "Santander Colombia", "SNC", "SEC", "SBI"
+
+name: "Resumen Cyber SF"
+identificadores: "Santander Financing Colombia", "Santander Consumer Finance Colombia", "financing", "N/A", "CO2"
+
+-----------------------------------
+hoja: "Push security"
+columna id: "company"
+
+hoja: "DLP"
+columna id: "company"
+
+hoja: "cifrado"
+columna id: "company"
+
+hoja: "Crowdstrike"
+columna id: "Company"
+
+hoja: "Netskope"
+columna id: "company"
+
+hoja: "High Risk Software"
+columna id: "company"
+
+hoja: "Qualys"
+columna id: "company"
+
+hoja: "Cobertura Qualys"
+columna id: "company"
+
+hoja: "Workstations Retired"
+columna id: "AD Company"
+
+hoja: "Non-Phishing"
+columna id: "company"
+
+hoja: "Windows hello"
+columna id: "company"
+
+hoja: "MFA"
+columna id: "company"
+
+hoja: "Ironchip"
+columna id: "company"
+
+hoja: "Harmony"
+columna id: "company"
+
+hoja: "MTD"
+columna id: "company"
+
+hoja: "MTD client version"
+columna id: "company"
+
+hoja: "Moviles"
+columna id: "company - id"
